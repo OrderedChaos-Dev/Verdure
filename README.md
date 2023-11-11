@@ -1,12 +1,13 @@
-<h2>**Changelog**</h2>  
+<h2>Changelog</h2>  
 Here's what I did  
-build.gradle/gradle.properties:
+
+build.gradle/gradle.properties:  
 - moved to official mappings (just cause)
 - removed cyanide, because I was too lazy to rebuild gradle with it (no feature order cycles anyway)
 - added 'idea' plugin, because I use intellij
 - Bumped mod version and forge version  
 
-The mod:
+The mod:  
 - Render layers are set in block models now, so I did that
 - BiomeLoadingEvent doesn't exist anymore, so I needed to use Forge's BiomeModifiers
 - There are 2 BiomeModifiers: VerdureBiomeModifier and VerdureTreeReplacerBiomeModifier

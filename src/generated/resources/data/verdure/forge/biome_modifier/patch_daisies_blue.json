@@ -1,0 +1,14 @@
+{
+  "type": "verdure:verdure_biome_modifier",
+  "biomes": [
+    "#minecraft:is_forest",
+    "#minecraft:is_jungle",
+    "#minecraft:is_taiga",
+    "#forge:is_plains",
+    "#forge:is_swamp",
+    []
+  ],
+  "configOption": "generate_daisies_patch",
+  "feature": "verdure:patch_daisies_blue",
+  "generationStep": "vegetal_decoration"
+}

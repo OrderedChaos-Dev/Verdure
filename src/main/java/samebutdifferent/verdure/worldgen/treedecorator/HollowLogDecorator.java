@@ -5,6 +5,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.WorldGenRegion;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.block.entity.RandomizableContainerBlockEntity;
@@ -30,11 +31,14 @@ public class HollowLogDecorator extends TreeDecorator {
     }
 
     @Override
-    public void place(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, Random pRandom, List<BlockPos> pLogPositions, List<BlockPos> pLeafPositions) {
+    public void place(TreeDecorator.Context context) {
+        List<BlockPos> pLogPositions = context.logs();
+        RandomSource pRandom = context.random();
+        LevelSimulatedReader pLevel = context.level();
         BlockPos pos = pLogPositions.get(2);
         Direction direction = Direction.from2DDataValue(pRandom.nextInt(4));
 
-        pBlockSetter.accept(pos, VerdureBlocks.HOLLOW_LOG.get().defaultBlockState().setValue(HollowLogBlock.FACING, direction));
+        context.setBlock(pos, VerdureBlocks.HOLLOW_LOG.get().defaultBlockState().setValue(HollowLogBlock.FACING, direction));
 
         RandomizableContainerBlockEntity.setLootTable((BlockGetter) pLevel, pRandom, pos, new ResourceLocation(Verdure.MOD_ID, "chests/hollow_log"));
     }

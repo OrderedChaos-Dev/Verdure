@@ -113,11 +113,6 @@ public class TallHangingMossBlock extends Block {
     }
 
     @Override
-    public BlockBehaviour.OffsetType getOffsetType() {
-        return BlockBehaviour.OffsetType.XZ;
-    }
-
-    @Override
     public long getSeed(BlockState pState, BlockPos pPos) {
         return Mth.getSeed(pPos.getX(), pPos.above(pState.getValue(HALF) == DoubleBlockHalf.UPPER ? 0 : 1).getY(), pPos.getZ());
     }

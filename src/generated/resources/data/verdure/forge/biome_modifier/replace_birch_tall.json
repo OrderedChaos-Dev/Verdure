@@ -1,0 +1,6 @@
+{
+  "type": "verdure:verdure_tree_replacer_biome_modifier",
+  "biomes": "minecraft:old_growth_birch_forest",
+  "feature": "verdure:birch_tall",
+  "originalFeature": "minecraft:birch_tall"
+}

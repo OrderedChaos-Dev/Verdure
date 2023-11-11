@@ -1,0 +1,10 @@
+{
+  "type": "verdure:verdure_biome_modifier",
+  "biomes": [
+    "#minecraft:is_overworld",
+    []
+  ],
+  "configOption": "generate_mushroom_shelf_underground",
+  "feature": "verdure:underground_mushroom_shelf",
+  "generationStep": "vegetal_decoration"
+}

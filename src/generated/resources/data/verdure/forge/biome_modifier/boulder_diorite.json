@@ -1,0 +1,12 @@
+{
+  "type": "verdure:verdure_biome_modifier",
+  "biomes": [
+    [
+      "minecraft:taiga",
+      "minecraft:snowy_taiga"
+    ]
+  ],
+  "configOption": "generate_boulder",
+  "feature": "verdure:boulder_diorite",
+  "generationStep": "local_modifications"
+}

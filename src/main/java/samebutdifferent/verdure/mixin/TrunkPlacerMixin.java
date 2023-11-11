@@ -3,6 +3,7 @@ package samebutdifferent.verdure.mixin;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.WorldGenRegion;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
@@ -22,7 +23,7 @@ import java.util.function.BiConsumer;
 public class TrunkPlacerMixin {
 
     @Inject(method = "setDirtAt", at = @At(value = "HEAD"), cancellable = true)
-    private static void onSetDirtAt(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, Random pRandom, BlockPos pPos, TreeConfiguration pConfig, CallbackInfo info) {
+    private static void onSetDirtAt(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, RandomSource pRandom, BlockPos pPos, TreeConfiguration pConfig, CallbackInfo info) {
         if (VerdureConfig.GENERATE_TREE_ROOTS.get()) {
             info.cancel();
             pBlockSetter.accept(pPos, Blocks.ROOTED_DIRT.defaultBlockState());

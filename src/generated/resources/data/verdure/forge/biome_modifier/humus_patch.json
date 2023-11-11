@@ -1,0 +1,10 @@
+{
+  "type": "verdure:verdure_biome_modifier",
+  "biomes": [
+    "#minecraft:is_jungle",
+    []
+  ],
+  "configOption": "generate_humus_patch",
+  "feature": "verdure:humus_patch",
+  "generationStep": "underground_ores"
+}

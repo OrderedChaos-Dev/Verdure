@@ -1,0 +1,11 @@
+{
+  "type": "verdure:verdure_biome_modifier",
+  "biomes": [
+    "#minecraft:is_river",
+    "#minecraft:is_jungle",
+    []
+  ],
+  "configOption": "generate_boulder",
+  "feature": "verdure:boulder_slate",
+  "generationStep": "local_modifications"
+}

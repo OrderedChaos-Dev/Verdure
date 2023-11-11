@@ -3,7 +3,11 @@ package samebutdifferent.verdure.worldgen.feature;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.Holder;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
@@ -13,6 +17,7 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.NoneFeatureConfiguration;
 import net.minecraft.world.level.material.Material;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Random;
 
@@ -25,11 +30,11 @@ public class FallenLogFeature extends Feature<NoneFeatureConfiguration> {
     public boolean place(FeaturePlaceContext<NoneFeatureConfiguration> context) {
         WorldGenLevel level = context.level();
         BlockPos origin = context.origin();
-        Random random = context.random();
+        RandomSource random = context.random();
         BlockState log = this.getBiomeLog(level, origin);
         Direction direction = Direction.Plane.HORIZONTAL.getRandomDirection(random);
         BlockPos.MutableBlockPos mutable = origin.mutable();
-        boolean mossy = random.nextBoolean() && Biome.getBiomeCategory(level.getBiome(origin)).equals(Biome.BiomeCategory.FOREST);
+        boolean mossy = random.nextBoolean() && level.getBiome(origin).is(BiomeTags.IS_FOREST);
 
         // check for available space
         for (int i = 0; i < 4; i++) {
@@ -55,30 +60,25 @@ public class FallenLogFeature extends Feature<NoneFeatureConfiguration> {
     }
 
     private BlockState getBiomeLog(WorldGenLevel level, BlockPos pos) {
-        Biome biome = level.getBiome(pos).value();
-        if (biome.getRegistryName().getPath().contains("birch")) {
+        Holder<Biome> biome = level.getBiome(pos);
+        ResourceLocation resourceLocation = biome.unwrapKey().get().location();
+        if (resourceLocation.getPath().contains("birch")) {
             return Blocks.BIRCH_LOG.defaultBlockState();
-        } else if (biome.getRegistryName().getPath().equals("dark_forest")) {
+        } else if (resourceLocation.getPath().equals("dark_forest")) {
             return Blocks.DARK_OAK_LOG.defaultBlockState();
-        } else if (biome.getRegistryName().getPath().equals("warped_forest")) {
+        } else if (resourceLocation.getPath().equals("warped_forest")) {
             return Blocks.WARPED_STEM.defaultBlockState();
-        } else if (biome.getRegistryName().getPath().equals("crimson_forest")) {
+        } else if (resourceLocation.getPath().equals("crimson_forest")) {
             return Blocks.CRIMSON_STEM.defaultBlockState();
         } else {
-            switch (Biome.getBiomeCategory(level.getBiome(pos))) {
-                case JUNGLE -> {
-                    return Blocks.JUNGLE_LOG.defaultBlockState();
-                }
-                case TAIGA -> {
-                    return Blocks.SPRUCE_LOG.defaultBlockState();
-                }
-                case SAVANNA -> {
-                    return Blocks.ACACIA_LOG.defaultBlockState();
-                }
-                default -> {
-                    return Blocks.OAK_LOG.defaultBlockState();
-                }
+            if (biome.is(BiomeTags.IS_JUNGLE)) {
+                return Blocks.JUNGLE_LOG.defaultBlockState();
+            } else if (biome.is(BiomeTags.IS_TAIGA)) {
+                return Blocks.SPRUCE_LOG.defaultBlockState();
+            } else if (biome.is(BiomeTags.IS_SAVANNA)) {
+                return Blocks.ACACIA_LOG.defaultBlockState();
             }
+            return Blocks.OAK_LOG.defaultBlockState();
         }
     }
 }

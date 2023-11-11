@@ -1,0 +1,6 @@
+{
+  "type": "verdure:verdure_tree_replacer_biome_modifier",
+  "biomes": "#minecraft:is_jungle",
+  "feature": "verdure:trees_jungle",
+  "originalFeature": "minecraft:trees_jungle"
+}

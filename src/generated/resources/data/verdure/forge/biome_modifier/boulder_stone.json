@@ -1,0 +1,10 @@
+{
+  "type": "verdure:verdure_biome_modifier",
+  "biomes": [
+    "#minecraft:is_forest",
+    []
+  ],
+  "configOption": "generate_boulder",
+  "feature": "verdure:boulder_stone",
+  "generationStep": "local_modifications"
+}

@@ -2,6 +2,7 @@ package samebutdifferent.verdure.mixin;
 
 import net.minecraft.core.Holder;
 import net.minecraft.data.worldgen.features.TreeFeatures;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.grower.AbstractMegaTreeGrower;
 import net.minecraft.world.level.block.grower.DarkOakTreeGrower;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -17,13 +18,13 @@ public class DarkOakTreeGrowerMixin extends AbstractMegaTreeGrower {
 
     @Nullable
     @Override
-    protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(Random random, boolean largeHive) {
+    protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredFeature(RandomSource random, boolean largeHive) {
         return null;
     }
 
     @Nullable
     @Override
-    protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredMegaFeature(Random random) {
+    protected Holder<? extends ConfiguredFeature<?, ?>> getConfiguredMegaFeature(RandomSource random) {
         if (VerdureConfig.GENERATE_DARK_OAK_HUMUS.get()) {
             return VerdureConfiguredFeatures.DARK_OAK_NO_LEAVES.getHolder().get();
         } else {

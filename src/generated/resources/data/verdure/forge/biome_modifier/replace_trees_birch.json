@@ -1,0 +1,6 @@
+{
+  "type": "verdure:verdure_tree_replacer_biome_modifier",
+  "biomes": "minecraft:birch_forest",
+  "feature": "verdure:trees_birch",
+  "originalFeature": "minecraft:trees_birch"
+}

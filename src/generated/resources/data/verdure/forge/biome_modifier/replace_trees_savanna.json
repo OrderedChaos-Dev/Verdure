@@ -1,0 +1,6 @@
+{
+  "type": "verdure:verdure_tree_replacer_biome_modifier",
+  "biomes": "#minecraft:is_savanna",
+  "feature": "verdure:trees_savanna",
+  "originalFeature": "minecraft:trees_savanna"
+}

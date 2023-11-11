@@ -1,0 +1,6 @@
+{
+  "type": "verdure:verdure_tree_replacer_biome_modifier",
+  "biomes": "minecraft:flower_forest",
+  "feature": "verdure:trees_flower_forest",
+  "originalFeature": "minecraft:trees_flower_forest"
+}

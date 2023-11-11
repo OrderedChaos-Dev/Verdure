@@ -3,6 +3,7 @@ package samebutdifferent.verdure.worldgen.treedecorator;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.Feature;
@@ -30,7 +31,11 @@ public class FallenLeavesDecorator extends TreeDecorator {
     }
 
     @Override
-    public void place(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, Random pRandom, List<BlockPos> pLogPositions, List<BlockPos> pLeafPositions) {
+    public void place(TreeDecorator.Context context) {
+        List<BlockPos> pLeafPositions = context.leaves();
+        RandomSource pRandom = context.random();
+        LevelSimulatedReader pLevel = context.level();
+
         if (!pLeafPositions.isEmpty() && pRandom.nextFloat() <= VerdureConfig.FALLEN_LEAVES_CHANCE.get()) {
             List<BlockPos> lowestLeafPositions = pLeafPositions.stream().filter(blockPos -> blockPos.getY() == pLeafPositions.get(0).getY()).toList();
             for (BlockPos pos : lowestLeafPositions) {
@@ -39,9 +44,9 @@ public class FallenLeavesDecorator extends TreeDecorator {
                 while (pLevel.isStateAtPosition(mutable.below(), blockState -> !blockState.getMaterial().isSolid())) {
                     mutable.move(Direction.DOWN);
                 }
-                if (Feature.isAir(pLevel, mutable)) {
+                if (context.isAir(mutable)) {
                     if (pRandom.nextBoolean()) {
-                        pBlockSetter.accept(mutable, state);
+                        context.setBlock(mutable, state);
                     }
                 }
             }

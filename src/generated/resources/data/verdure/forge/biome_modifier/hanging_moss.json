@@ -1,0 +1,10 @@
+{
+  "type": "verdure:verdure_biome_modifier",
+  "biomes": [
+    "#forge:is_cave",
+    []
+  ],
+  "configOption": "generate_hanging_moss",
+  "feature": "verdure:hanging_moss",
+  "generationStep": "vegetal_decoration"
+}

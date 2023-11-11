@@ -3,6 +3,7 @@ package samebutdifferent.verdure.worldgen.treedecorator;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.MultifaceBlock;
@@ -27,7 +28,10 @@ public class DaisiesDecorator extends TreeDecorator {
     }
 
     @Override
-    public void place(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, Random pRandom, List<BlockPos> pLogPositions, List<BlockPos> pLeafPositions) {
+    public void place(TreeDecorator.Context context) {
+        List<BlockPos> pLeafPositions = context.leaves();
+        RandomSource pRandom = context.random();
+        LevelSimulatedReader pLevel = context.level();
         BlockState state;
         switch (pRandom.nextInt(3)) {
             case 1 -> state = VerdureBlocks.BLUE_DAISIES.get().defaultBlockState();
@@ -36,8 +40,8 @@ public class DaisiesDecorator extends TreeDecorator {
         }
         pLeafPositions.forEach((pos -> {
             for (Direction direction : Direction.values()) {
-                if (Feature.isAir(pLevel, pos.relative(direction))) {
-                    pBlockSetter.accept(pos.relative(direction), state.setValue(MultifaceBlock.getFaceProperty(direction.getOpposite()), true));
+                if (context.isAir(pos.relative(direction))) {
+                    context.setBlock(pos.relative(direction), state.setValue(MultifaceBlock.getFaceProperty(direction.getOpposite()), true));
                 }
             }
         }));

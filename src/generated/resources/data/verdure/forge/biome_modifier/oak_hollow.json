@@ -1,0 +1,12 @@
+{
+  "type": "verdure:verdure_biome_modifier",
+  "biomes": [
+    [
+      "minecraft:forest",
+      "minecraft:flower_forest"
+    ]
+  ],
+  "configOption": "generate_oak_hollow",
+  "feature": "verdure:oak_hollow",
+  "generationStep": "vegetal_decoration"
+}

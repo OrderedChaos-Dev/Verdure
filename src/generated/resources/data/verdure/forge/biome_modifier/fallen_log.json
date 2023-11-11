@@ -1,0 +1,13 @@
+{
+  "type": "verdure:verdure_biome_modifier",
+  "biomes": [
+    "#forge:is_plains",
+    "#minecraft:is_forest",
+    "#minecraft:is_jungle",
+    "#minecraft:is_taiga",
+    []
+  ],
+  "configOption": "generate_fallen_log",
+  "feature": "verdure:fallen_log",
+  "generationStep": "vegetal_decoration"
+}

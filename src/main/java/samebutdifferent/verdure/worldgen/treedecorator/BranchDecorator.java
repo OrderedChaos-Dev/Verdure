@@ -3,6 +3,7 @@ package samebutdifferent.verdure.worldgen.treedecorator;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.LevelSimulatedReader;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.state.BlockState;
@@ -31,7 +32,12 @@ public class BranchDecorator extends TreeDecorator {
     }
 
     @Override
-    public void place(LevelSimulatedReader pLevel, BiConsumer<BlockPos, BlockState> pBlockSetter, Random pRandom, List<BlockPos> pLogPositions, List<BlockPos> pLeafPositions) {
+    public void place(TreeDecorator.Context context) {
+        List<BlockPos> pLeafPositions = context.leaves();
+        List<BlockPos> pLogPositions = context.logs();
+        RandomSource pRandom = context.random();
+        LevelSimulatedReader pLevel = context.level();
+
         if (!pLeafPositions.isEmpty() && VerdureConfig.GENERATE_TREE_BRANCHES.get()) {
             int lowestLeafY = pLeafPositions.get(0).getY();
             List<BlockPos> exposedLogs = pLogPositions.stream().filter(blockPos -> blockPos.getY() < lowestLeafY).toList();
@@ -39,13 +45,13 @@ public class BranchDecorator extends TreeDecorator {
             Direction xRand = pRandom.nextBoolean() ? Direction.EAST : Direction.WEST;
             if (exposedLogs.size() > 2) {
                 BlockPos posFirst = exposedLogs.get(exposedLogs.size() - 1);
-                if (Feature.isAir(pLevel, posFirst.relative(xRand))) {
-                    pBlockSetter.accept(posFirst.relative(xRand), this.state.setValue(HorizontalDirectionalBlock.FACING, xRand));
+                if (context.isAir(posFirst.relative(xRand))) {
+                    context.setBlock(posFirst.relative(xRand), this.state.setValue(HorizontalDirectionalBlock.FACING, xRand));
                 }
                 if (exposedLogs.size() > 3) {
                     BlockPos posSecond = exposedLogs.get(exposedLogs.size() - 2);
-                    if (Feature.isAir(pLevel, posSecond.relative(zRand))) {
-                        pBlockSetter.accept(posSecond.relative(zRand), this.state.setValue(HorizontalDirectionalBlock.FACING, zRand));
+                    if (context.isAir(posSecond.relative(zRand))) {
+                        context.setBlock(posSecond.relative(zRand), this.state.setValue(HorizontalDirectionalBlock.FACING, zRand));
                     }
                 }
             }

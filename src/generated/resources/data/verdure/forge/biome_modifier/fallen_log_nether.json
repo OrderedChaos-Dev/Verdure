@@ -1,0 +1,12 @@
+{
+  "type": "verdure:verdure_biome_modifier",
+  "biomes": [
+    [
+      "minecraft:crimson_forest",
+      "minecraft:warped_forest"
+    ]
+  ],
+  "configOption": "generate_fallen_log_nether",
+  "feature": "verdure:fallen_log_nether",
+  "generationStep": "vegetal_decoration"
+}

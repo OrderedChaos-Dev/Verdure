@@ -1,0 +1,10 @@
+{
+  "type": "verdure:verdure_biome_modifier",
+  "biomes": [
+    "#minecraft:is_savanna",
+    []
+  ],
+  "configOption": "generate_boulder",
+  "feature": "verdure:boulder_granite",
+  "generationStep": "local_modifications"
+}

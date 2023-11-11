@@ -1,0 +1,10 @@
+{
+  "type": "verdure:verdure_biome_modifier",
+  "biomes": [
+    "#forge:is_swamp",
+    []
+  ],
+  "configOption": "generate_smooth_dirt_patch",
+  "feature": "verdure:smooth_dirt_patch_swamp",
+  "generationStep": "underground_ores"
+}

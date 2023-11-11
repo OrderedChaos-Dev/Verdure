@@ -1,0 +1,6 @@
+{
+  "type": "verdure:verdure_tree_replacer_biome_modifier",
+  "biomes": "#minecraft:is_taiga",
+  "feature": "verdure:trees_taiga",
+  "originalFeature": "minecraft:trees_taiga"
+}

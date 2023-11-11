@@ -1,0 +1,10 @@
+{
+  "type": "verdure:verdure_biome_modifier",
+  "biomes": [
+    "#minecraft:is_savanna",
+    []
+  ],
+  "configOption": "generate_fallen_log",
+  "feature": "verdure:fallen_log_savanna",
+  "generationStep": "vegetal_decoration"
+}

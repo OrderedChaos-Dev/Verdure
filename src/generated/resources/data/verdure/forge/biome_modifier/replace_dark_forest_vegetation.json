@@ -1,0 +1,7 @@
+{
+  "type": "verdure:verdure_tree_replacer_biome_modifier",
+  "biomes": "minecraft:dark_forest",
+  "configOption": "generate_dark_oak_humus",
+  "feature": "verdure:dark_forest_vegetation",
+  "originalFeature": "minecraft:dark_forest_vegetation"
+}

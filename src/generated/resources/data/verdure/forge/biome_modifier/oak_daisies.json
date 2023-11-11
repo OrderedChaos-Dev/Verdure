@@ -1,0 +1,9 @@
+{
+  "type": "verdure:verdure_biome_modifier",
+  "biomes": [
+    "minecraft:forest"
+  ],
+  "configOption": "generate_daisy_tree",
+  "feature": "verdure:oak_daisies",
+  "generationStep": "vegetal_decoration"
+}

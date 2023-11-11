@@ -6,11 +6,12 @@ import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.levelgen.feature.BaseDiskFeature;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
+import net.minecraft.world.level.levelgen.feature.DiskFeature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.configurations.DiskConfiguration;
 
-public class DitheredDiskFeature extends BaseDiskFeature {
+public class DitheredDiskFeature extends DiskFeature {
     public DitheredDiskFeature(Codec<DiskConfiguration> codec) {
         super(codec);
     }
@@ -41,21 +42,21 @@ public class DitheredDiskFeature extends BaseDiskFeature {
                             BlockState state = level.getBlockState(pos);
                             Block block = state.getBlock();
                             if (k > yLower) {
-                                for(BlockState replaceableBlock : config.targets()) {
-                                    if (replaceableBlock.is(block)) {
-                                        if (i >= origin.getX() + radius - 2 || j >= origin.getZ() + radius - 2 || i <= origin.getX() - radius + 2 || j <= origin.getZ() - radius + 2) {
-                                            if (level.getRandom().nextBoolean()) {
-                                                level.setBlock(pos, config.state(), 2);
-                                                this.markAboveForPostProcessing(level, pos);
-                                                shouldPlace = true;
-                                                break;
-                                            }
-                                        } else {
-                                            level.setBlock(pos, config.state(), 2);
+                                BlockPredicate predicate = config.target();
+                                if (predicate.test(level, pos)) {
+                                    BlockState placementState = config.stateProvider().getState(level, level.getRandom(), pos);
+                                    if (i >= origin.getX() + radius - 2 || j >= origin.getZ() + radius - 2 || i <= origin.getX() - radius + 2 || j <= origin.getZ() - radius + 2) {
+                                        if (level.getRandom().nextBoolean()) {
+                                            level.setBlock(pos, placementState, 2);
                                             this.markAboveForPostProcessing(level, pos);
                                             shouldPlace = true;
                                             break;
                                         }
+                                    } else {
+                                        level.setBlock(pos, placementState, 2);
+                                        this.markAboveForPostProcessing(level, pos);
+                                        shouldPlace = true;
+                                        break;
                                     }
                                 }
                             }

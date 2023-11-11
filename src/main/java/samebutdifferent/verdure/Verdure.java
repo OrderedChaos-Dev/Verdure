@@ -36,6 +36,7 @@ public class Verdure {
         VerdureTreeDecoratorTypes.TREE_DECORATOR_TYPES.register(bus);
         VerdureConfiguredFeatures.CONFIGURED_FEATURES.register(bus);
         VerdurePlacedFeatures.PLACED_FEATURES.register(bus);
+        VerdureBiomeModifierSerializers.BIOME_MODIFIER_SERIALIZERS.register(bus);
 
         MinecraftForge.EVENT_BUS.register(this);
     }

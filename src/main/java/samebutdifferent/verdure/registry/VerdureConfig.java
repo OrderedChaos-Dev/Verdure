@@ -4,6 +4,9 @@ import net.minecraftforge.common.ForgeConfigSpec;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.config.ModConfigEvent;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class VerdureConfig {
     public static ForgeConfigSpec COMMON_CONFIG;
     
@@ -26,6 +29,8 @@ public class VerdureConfig {
     public static final ForgeConfigSpec.BooleanValue GENERATE_TREE_BRANCHES;
     public static final ForgeConfigSpec.DoubleValue FALLEN_LEAVES_CHANCE;
     public static final ForgeConfigSpec.BooleanValue GENERATE_DARK_OAK_HUMUS;
+
+    public static final Map<String, ForgeConfigSpec.BooleanValue> GENERATION_SETTINGS = new HashMap<>();
 
     static {
         ForgeConfigSpec.Builder COMMON_BUILDER = new ForgeConfigSpec.Builder();
@@ -52,6 +57,24 @@ public class VerdureConfig {
         COMMON_BUILDER.pop();
 
         COMMON_CONFIG = COMMON_BUILDER.build();
+
+        GENERATION_SETTINGS.put("generate_boulder", GENERATE_BOULDER);
+        GENERATION_SETTINGS.put("generate_smooth_dirt_patch", GENERATE_SMOOTH_DIRT_PATCH);
+        GENERATION_SETTINGS.put("generate_humus_patch", GENERATE_HUMUS_PATCH);
+        GENERATION_SETTINGS.put("generate_clover_patch", GENERATE_CLOVER_PATCH);
+        GENERATION_SETTINGS.put("generate_daisies_patch", GENERATE_DAISIES_PATCH);
+        GENERATION_SETTINGS.put("generate_pebbles", GENERATE_PEBBLES);
+        GENERATION_SETTINGS.put("generate_rock", GENERATE_ROCK);
+        GENERATION_SETTINGS.put("generate_fallen_log", GENERATE_FALLEN_LOG);
+        GENERATION_SETTINGS.put("generate_daisy_tree", GENERATE_DAISY_TREE);
+        GENERATION_SETTINGS.put("generate_oak_hollow", GENERATE_OAK_HOLLOW);
+        GENERATION_SETTINGS.put("generate_fallen_log_nether", GENERATE_FALLEN_LOG_NETHER);
+        GENERATION_SETTINGS.put("generate_mushroom_shelf_surface", GENERATE_MUSHROOM_SHELF_SURFACE);
+        GENERATION_SETTINGS.put("generate_mushroom_shelf_underground", GENERATE_MUSHROOM_SHELF_UNDERGROUND);
+        GENERATION_SETTINGS.put("generate_hanging_moss", GENERATE_HANGING_MOSS);
+        GENERATION_SETTINGS.put("generate_tree_roots", GENERATE_TREE_ROOTS);
+        GENERATION_SETTINGS.put("generate_tree_branches", GENERATE_TREE_BRANCHES);
+        GENERATION_SETTINGS.put("generate_dark_oak_humus", GENERATE_DARK_OAK_HUMUS);
     }
 
     @SubscribeEvent

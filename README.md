@@ -1,8 +1,7 @@
 <h2>Changelog</h2>  
 Here's what I did  
 
-build.gradle/gradle.properties:  
-- moved to official mappings (just cause)
+build.gradle/gradle.properties:
 - removed cyanide, because I was too lazy to rebuild gradle with it (no feature order cycles anyway)
 - added 'idea' plugin, because I use intellij
 - Bumped mod version and forge version  

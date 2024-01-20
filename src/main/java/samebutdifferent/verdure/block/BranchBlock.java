@@ -17,10 +17,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -37,7 +34,7 @@ import net.minecraftforge.common.ToolActions;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class BranchBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock {
+public class BranchBlock extends HorizontalDirectionalBlock implements SimpleWaterloggedBlock, BonemealableBlock {
     private final Block log;
     private final Block fallenLeaves;
     protected static final VoxelShape X_AXIS_AABB = Block.box(0.0D, 0.0D, 7.0D, 16.0D, 16.0D, 9.0D);
@@ -172,5 +169,20 @@ public class BranchBlock extends HorizontalDirectionalBlock implements SimpleWat
     @Override
     public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
         return 100;
+    }
+
+    @Override
+    public boolean isValidBonemealTarget(BlockGetter pLevel, BlockPos pPos, BlockState pState, boolean pIsClient) {
+        return !pState.getValue(LEAVES);
+    }
+
+    @Override
+    public boolean isBonemealSuccess(Level pLevel, RandomSource pRandom, BlockPos pPos, BlockState pState) {
+        return true;
+    }
+
+    @Override
+    public void performBonemeal(ServerLevel pLevel, RandomSource pRandom, BlockPos pPos, BlockState pState) {
+        pLevel.setBlock(pPos, pState.setValue(LEAVES, true), 2);
     }
 }
